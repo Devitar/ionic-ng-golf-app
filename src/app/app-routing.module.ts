@@ -7,7 +7,8 @@ const routes: Routes = [
     redirectTo: 'home',
     pathMatch: 'full'
   },
-  { path: 'home', loadChildren: './home/home.module#HomePageModule' }
+  { path: 'home', loadChildren: './home/home.module#HomePageModule' },
+  { path: 'player-config', loadChildren: './player-config/player-config.module#PlayerConfigPageModule' }
 ];
 
 @NgModule({

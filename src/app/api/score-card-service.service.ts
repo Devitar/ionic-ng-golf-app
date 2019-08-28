@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { GolfCourses } from '../models/golf-courses';
 import { GolfCourse } from '../models/golf-course';
+import { Player } from '../models/player';
 
 @Injectable({
   providedIn: 'root'
@@ -13,6 +14,8 @@ export class ScorecardService {
   allCoursesUrl = 'https://golf-courses-api.herokuapp.com/courses';
   selectedCourse: GolfCourse;
   hasPicked = false;
+
+  allPlayers: Array<Player>;
 
   constructor(private httpClient: HttpClient) { }
 
@@ -34,6 +37,18 @@ export class ScorecardService {
       return [intlCode, '(', match[2], ') ', match[3], '-', match[4]].join('');
     }
     return null;
+  }
+
+  setPlayers(players) {
+    this.allPlayers = players;
+  }
+
+  getPlayers() {
+    if (this.allPlayers) {
+      return this.allPlayers;
+    } else {
+      return false;
+    }
   }
 
 }

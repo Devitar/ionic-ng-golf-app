@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ScorecardService } from '../api/score-card-service.service';
 import { GolfCourse } from '../models/golf-course';
+import { NavController } from '@ionic/angular';
 
 @Component({
   selector: 'app-home',
@@ -10,20 +11,26 @@ import { GolfCourse } from '../models/golf-course';
 export class HomePage implements OnInit {
 
   courses: any;
-  selectedCourse;
+  selectedCourse: GolfCourse;
 
-  noSelectImg = "../../assets/icons/windows.png";
+  noSelectImg = '../../assets/icons/windows.png';
 
-  constructor(private scoreCardService: ScorecardService) { 
+  constructor(
+    private scoreCardService: ScorecardService,
+    private navCtrl: NavController,
+    ) {
     this.scoreCardService
     .getGolfCourses()
     .subscribe(data => {
       this.courses = data;
-      console.log(data);
     });
   }
 
   ngOnInit() {}
+
+  goToGolfSite() {
+    window.location.href = this.selectedCourse.website;
+  }
 
   selectCourse(e) {
     this.scoreCardService.getGolfCourseById(e).subscribe((response) => {
@@ -43,6 +50,10 @@ export class HomePage implements OnInit {
       };
       this.selectedCourse = courseObj;
       this.scoreCardService.selectedCourse = courseObj;
-    })
+    });
+  }
+
+  chooseCourse() {
+    this.navCtrl.navigateForward(['player-config']);
   }
 }
