@@ -22,7 +22,7 @@
         </ion-item>
     </ion-card-header>
     <ion-card-content>
-      <ion-input placeholder="Enter Player Name" *ngFor="let index of (playerAmt | numberToArray)"></ion-input>
+      <ion-input placeholder="Enter Player Name" *ngFor="let index of (playerAmt | numberToArray)" [id]="index"></ion-input>
     </ion-card-content>
   </ion-card>
   <ion-button expand="block">
