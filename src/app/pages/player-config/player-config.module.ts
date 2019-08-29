@@ -7,6 +7,8 @@ import { IonicModule } from '@ionic/angular';
 
 import { PlayerConfigPage } from './player-config.page';
 
+import { PipesModule } from '../../pipes/pipes.module';
+
 const routes: Routes = [
   {
     path: '',
@@ -19,7 +21,8 @@ const routes: Routes = [
     CommonModule,
     FormsModule,
     IonicModule,
-    RouterModule.forChild(routes)
+    RouterModule.forChild(routes),
+    PipesModule
   ],
   declarations: [PlayerConfigPage]
 })

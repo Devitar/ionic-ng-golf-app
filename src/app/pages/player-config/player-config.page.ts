@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ScorecardService } from '../../api/score-card-service.service';
 
 @Component({
   selector: 'app-player-config',
@@ -7,9 +8,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PlayerConfigPage implements OnInit {
 
-  constructor() { }
+  playerAmt = 1;
+
+  constructor(private scoreCardService: ScorecardService) { }
 
   ngOnInit() {
+  }
+
+  updatePlayerCount(amount) {
+    this.playerAmt = amount;
+    this.scoreCardService.setPlayers(amount);
   }
 
 }

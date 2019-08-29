@@ -1,0 +1,31 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-buttons slot="end">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Player Configuration</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-card>
+    <ion-card-header>
+        <ion-card-title style="text-align: center;">Number of Players: {{ playerAmt }}</ion-card-title>
+        <ion-item>
+          <ion-range min="1" max="4" step="1" value="1" snaps color="primary" (ionChange)="updatePlayerCount($event.detail.value)">
+            <ion-icon slot="start" size="small" name="md-person"></ion-icon>
+            <ion-icon slot="end" name="md-person-add"></ion-icon>
+          </ion-range>
+        </ion-item>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-input placeholder="Enter Player Name" *ngFor="let index of (playerAmt | numberToArray)"></ion-input>
+    </ion-card-content>
+  </ion-card>
+  <ion-button expand="block">
+    Next
+  </ion-button>
+</ion-content>

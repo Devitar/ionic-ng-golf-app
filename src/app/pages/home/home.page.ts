@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { ScorecardService } from '../api/score-card-service.service';
-import { GolfCourse } from '../models/golf-course';
+import { ScorecardService } from '../../api/score-card-service.service';
+import { GolfCourse } from '../../models/golf-course';
 import { NavController } from '@ionic/angular';
 
 @Component({
