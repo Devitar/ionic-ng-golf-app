@@ -46,11 +46,64 @@
             <div class="gridCell2">
               {{ courseYards.outTotal }}
             </div>
-            <div class="gridCell" *ngFor="let yardage2 of courseYards.inYards">
-              {{ yardage2 }}
+            <div class="gridCell" *ngFor="let yardage of courseYards.inYards">
+              {{ yardage }}
             </div>
             <div class="gridCell2">
               {{ courseYards.inTotal }}
+            </div>
+          </ion-col>
+
+          <ion-col>
+            <div class="gridCell" *ngFor="let handicap of courseHcp.outHcp">
+              {{ handicap }}
+            </div>
+            <div class="gridCell2">
+              {{ courseHcp.outTotal }}
+            </div>
+            <div class="gridCell" *ngFor="let handicap of courseHcp.inHcp">
+              {{ handicap }}
+            </div>
+            <div class="gridCell2">
+              {{ courseHcp.inTotal }}
+            </div>
+          </ion-col>
+
+          <ion-col *ngFor="let player of players">
+            <div
+              class="gridCell3"
+              *ngFor="let slot of courseHoles.outHoles"
+              contenteditable="true"
+            >
+              None
+            </div>
+            <div class="gridCell2" id="player.name | totalId:1">
+              0
+            </div>
+            <div
+              class="gridCell3"
+              *ngFor="let slot of courseHoles.inHoles"
+              contenteditable="true"
+            >
+              None
+            </div>
+            <div class="gridCell2" id="player.name | totalId:2">
+              0
+            </div>
+          </ion-col>
+
+          <ion-col>
+            <div class="gridCell" *ngFor="let par of coursePar.outPar">
+              {{ par }}
+            </div>
+            <div class="gridCell2">
+              {{ coursePar.outTotal }}
+            </div>
+            <div class="gridCell" *ngFor="let par of coursePar.inPar">
+              {{ par }}
+            </div>
+            <div class="gridCell2">
+              {{ coursePar.inTotal }}
             </div>
           </ion-col>
         </ion-row>

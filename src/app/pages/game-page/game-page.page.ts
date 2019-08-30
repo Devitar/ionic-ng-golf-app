@@ -25,6 +25,20 @@ export class GamePagePage implements OnInit {
     inTotal: 0,
     allTotal: 0,
   };
+  courseHcp = {
+    outHcp: [],
+    outTotal: 0,
+    inHcp: [],
+    inTotal: 0,
+    allTotal: 0,
+  };
+  coursePar = {
+    outPar: [],
+    outTotal: 0,
+    inPar: [],
+    inTotal: 0,
+    allTotal: 0,
+  };
 
   constructor(
     private scoreCardService: ScorecardService,
@@ -49,6 +63,13 @@ export class GamePagePage implements OnInit {
         if (teeBox.teeType === this.selectedTee) {
           this.courseYards.outYards.push(teeBox.yards);
           this.courseYards.outTotal += teeBox.yards;
+
+          this.courseHcp.outHcp.push(teeBox.hcp);
+          this.courseHcp.outTotal += teeBox.hcp;
+
+          this.coursePar.outPar.push(teeBox.par);
+          this.coursePar.outTotal += teeBox.par;
+
         }
       });
     });
@@ -57,12 +78,18 @@ export class GamePagePage implements OnInit {
         if (teeBox.teeType === this.selectedTee) {
           this.courseYards.inYards.push(teeBox.yards);
           this.courseYards.inTotal += teeBox.yards;
+
+          this.courseHcp.inHcp.push(teeBox.hcp);
+          this.courseHcp.inTotal += teeBox.hcp;
+
+          this.coursePar.inPar.push(teeBox.par);
+          this.coursePar.inTotal += teeBox.par;
+
         }
       });
     });
     this.courseYards.allTotal = this.courseYards.outTotal + this.courseYards.inTotal;
 
-    console.log(this.courseYards, this.courseHoles);
   }
 
   async showToast(msg) {
@@ -89,6 +116,7 @@ export class GamePagePage implements OnInit {
   }
 
   saveGame() {
+
     this.showToast('Your scores have been saved!');
   }
 

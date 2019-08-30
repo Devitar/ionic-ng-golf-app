@@ -31,7 +31,7 @@
       <ion-select interface="popover" placeholder="Select Tee" [(ngModel)]="selectedTee" (ionChange)="teeSelected($event.detail.value)">
         <ion-select-option *ngFor="let tee of filterTees(selectedCourse.holes[0].teeBoxes)" [value]="tee.teeType">{{ tee.teeType | capitalizeFirst }}</ion-select-option>
       </ion-select>
-      <ion-grid *ngIf="selectedTee">
+      <!-- <ion-grid *ngIf="selectedTee">
         <ion-row>
           <ion-col>
             <p>{{ selectedTee | capitalizeFirst }}</p>
@@ -40,7 +40,7 @@
             <p>Holes: {{ selectedCourse.hole_count }}</p>
           </ion-col>
         </ion-row>
-      </ion-grid>
+      </ion-grid> -->
       <p *ngIf="!selectedTee">Select a Tee Type above to continue.</p>
     </ion-card-content>
   </ion-card>
