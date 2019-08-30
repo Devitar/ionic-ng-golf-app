@@ -25,7 +25,7 @@ export class GamePagePage implements OnInit {
       this.navCtrl.navigateForward(['player-config']);
     } else {
       this.scoreCardService.allPlayers.forEach(v => {
-        if (v.name === undefined) {
+        if (v.name === undefined || v.name === '') {
           this.navCtrl.navigateForward(['player-config', {error: 'emptyName'}]);
         }
       });

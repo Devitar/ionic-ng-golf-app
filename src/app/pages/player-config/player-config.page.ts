@@ -27,11 +27,7 @@ export class PlayerConfigPage implements OnInit {
     }
     const errorMsg = this.route.snapshot.paramMap.get('error');
     if (errorMsg) {
-      this.alertController.create({
-        header: 'Error',
-        message: 'Player names cannot be empty',
-        buttons: ['OK']
-      });
+      this.setError('Player names cannot be empty.');
     }
   }
 
@@ -40,18 +36,21 @@ export class PlayerConfigPage implements OnInit {
     this.scoreCardService.setPlayers(amount);
   }
 
-  async startGame() {
+  async setError(msg) {
+    const alert = await this.alertController.create({
+      header: 'Error',
+      message: msg,
+      buttons: ['OK']
+    });
+    alert.present();
+  }
+
+  startGame() {
     let canContinue = true;
     for (let i = 1; i <= this.playerAmt; i++) {
-      if (this.inputValues[i] === undefined) {
+      if (this.inputValues[i] === undefined || this.inputValues[i] === '') {
         canContinue = false;
-        const alert = await this.alertController.create({
-          header: 'Error',
-          message: 'Player names cannot be empty',
-          buttons: ['OK']
-        });
-        alert.present();
-
+        this.setError('Player names cannot be empty.');
         break;
       }
       let instances = 1;
