@@ -38,7 +38,7 @@ export class PlayerConfigPage implements OnInit {
 
   async setError(msg) {
     const alert = await this.alertController.create({
-      header: 'Error',
+      header: 'Oops!',
       message: msg,
       buttons: ['OK']
     });

@@ -13,6 +13,7 @@ export class ScorecardService {
 
   allCoursesUrl = 'https://golf-courses-api.herokuapp.com/courses';
   selectedCourse: GolfCourse;
+  selectedTee: string;
   hasPicked = false;
 
   allPlayers: Array<Player>;

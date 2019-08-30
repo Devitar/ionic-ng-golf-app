@@ -4,6 +4,9 @@
       <ion-back-button></ion-back-button>
     </ion-buttons>
     <ion-buttons slot="end">
+      <ion-button (click)="saveGame()"
+        ><ion-icon name="save"></ion-icon
+      ></ion-button>
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
     <ion-title>Scorecard</ion-title>
@@ -11,7 +14,25 @@
 </ion-header>
 
 <ion-content>
-  <p *ngFor="let player of players">
-    {{ player.name }}
-  </p>
+  <ion-card id="mainScoreCard">
+    <ion-card-header>
+      <ion-card-title
+        >{{ selectedCourse.name }}:
+        {{ selectedTee | capitalizeFirst }}</ion-card-title
+      >
+    </ion-card-header>
+    <ion-card-content>
+      <ion-grid>
+
+        <ion-row>
+          <ion-col>
+            <div class="gridCell" *ngFor="let hole of ">
+
+            </div>
+          </ion-col>
+        </ion-row>
+
+      </ion-grid>
+    </ion-card-content>
+  </ion-card>
 </ion-content>

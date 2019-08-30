@@ -35,15 +35,15 @@ export class HomePage implements OnInit {
   }
 
   filterTees(tees) {
-    let teeFilter = tees.filter(v => {
-      return v.teeType !== "auto change location";
+    const teeFilter = tees.filter(v => {
+      return v.teeType !== 'auto change location';
     });
     return teeFilter;
   }
 
   selectCourse(e) {
     this.canContinue = false;
-    this.selectedTee = "";
+    this.selectedTee = '';
     this.scoreCardService.getGolfCourseById(e).subscribe((response) => {
       const data = response.data;
       const courseObj: GolfCourse = {
@@ -67,6 +67,7 @@ export class HomePage implements OnInit {
   teeSelected(value) {
     if (value !== '') {
       this.canContinue = true;
+      this.scoreCardService.selectedTee = value;
     }
   }
 
