@@ -22,7 +22,15 @@
         </ion-item>
     </ion-card-header>
     <ion-card-content>
-      <ion-input placeholder="Enter Player Name" *ngFor="let index of (playerAmt | numberToArray)" [id]="index"></ion-input>
+      <ion-input 
+        placeholder="Enter Player Name" 
+        *ngFor="let index of (playerAmt | numberToArray)" 
+        [id]="index | playerIndex"
+        maxLength="25"
+        minLength="1"
+        [(ngModel)]="inputValues[index+1]"
+        >
+      </ion-input>
     </ion-card-content>
   </ion-card>
   <ion-button expand="block" (click)="startGame()">
