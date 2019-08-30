@@ -12,6 +12,8 @@ export class HomePage implements OnInit {
 
   courses: any;
   selectedCourse: GolfCourse;
+  selectedTee: string;
+  canContinue = false;
 
   noSelectImg = '../../assets/icons/windows.png';
 
@@ -32,7 +34,16 @@ export class HomePage implements OnInit {
     window.location.href = this.selectedCourse.website;
   }
 
+  filterTees(tees) {
+    let teeFilter = tees.filter(v => {
+      return v.teeType !== "auto change location";
+    });
+    return teeFilter;
+  }
+
   selectCourse(e) {
+    this.canContinue = false;
+    this.selectedTee = "";
     this.scoreCardService.getGolfCourseById(e).subscribe((response) => {
       const data = response.data;
       const courseObj: GolfCourse = {
@@ -53,7 +64,15 @@ export class HomePage implements OnInit {
     });
   }
 
+  teeSelected(value) {
+    if (value !== '') {
+      this.canContinue = true;
+    }
+  }
+
   chooseCourse() {
-    this.navCtrl.navigateForward(['player-config']);
+    if (this.canContinue) {
+      this.navCtrl.navigateForward(['player-config']);
+    }
   }
 }

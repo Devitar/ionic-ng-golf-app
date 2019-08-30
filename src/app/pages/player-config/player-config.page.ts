@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ScorecardService } from '../../api/score-card-service.service';
+import { NavController } from '@ionic/angular';
 
 @Component({
   selector: 'app-player-config',
@@ -10,14 +11,21 @@ export class PlayerConfigPage implements OnInit {
 
   playerAmt = 1;
 
-  constructor(private scoreCardService: ScorecardService) { }
+  constructor(
+    private scoreCardService: ScorecardService,
+    private navCtrl: NavController,
+    ) { }
 
   ngOnInit() {
   }
 
   updatePlayerCount(amount) {
-    this.playerAmt = amount;
+    // this.playerAmt = amount;
     this.scoreCardService.setPlayers(amount);
+  }
+
+  startGame() {
+    this.navCtrl.navigateForward(['game-page']);
   }
 
 }

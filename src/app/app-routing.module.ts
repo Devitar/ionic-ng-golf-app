@@ -8,7 +8,8 @@ const routes: Routes = [
     pathMatch: 'full'
   },
   { path: 'home', loadChildren: './pages/home/home.module#HomePageModule' },
-  { path: 'player-config', loadChildren: './pages/player-config/player-config.module#PlayerConfigPageModule' }
+  { path: 'player-config', loadChildren: './pages/player-config/player-config.module#PlayerConfigPageModule' },  { path: 'game-page', loadChildren: './pages/game-page/game-page.module#GamePagePageModule' }
+
 ];
 
 @NgModule({

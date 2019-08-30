@@ -15,7 +15,7 @@
     <ion-card-header>
         <ion-card-title style="text-align: center;">Number of Players: {{ playerAmt }}</ion-card-title>
         <ion-item>
-          <ion-range min="1" max="4" step="1" value="1" snaps color="primary" (ionChange)="updatePlayerCount($event.detail.value)">
+          <ion-range [(ngModel)]="playerAmt" min="1" max="4" step="1" value="1" snaps color="primary" (ionChange)="updatePlayerCount($event.detail.value)">
             <ion-icon slot="start" size="small" name="md-person"></ion-icon>
             <ion-icon slot="end" name="md-person-add"></ion-icon>
           </ion-range>
@@ -25,7 +25,7 @@
       <ion-input placeholder="Enter Player Name" *ngFor="let index of (playerAmt | numberToArray)" [id]="index"></ion-input>
     </ion-card-content>
   </ion-card>
-  <ion-button expand="block">
+  <ion-button expand="block" (click)="startGame()">
     Next
   </ion-button>
 </ion-content>
