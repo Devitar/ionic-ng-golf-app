@@ -23,15 +23,37 @@
     </ion-card-header>
     <ion-card-content>
       <ion-grid>
-
         <ion-row>
           <ion-col>
-            <div class="gridCell" *ngFor="let hole of ">
+            <div class="gridCell" *ngFor="let hole of courseHoles.outHoles">
+              {{ hole.hole }}
+            </div>
+            <div class="gridCell2">
+              OUT
+            </div>
+            <div class="gridCell" *ngFor="let hole of courseHoles.inHoles">
+              {{ hole.hole }}
+            </div>
+            <div class="gridCell2">
+              IN
+            </div>
+          </ion-col>
 
+          <ion-col>
+            <div class="gridCell" *ngFor="let yardage of courseYards.outYards">
+              {{ yardage }}
+            </div>
+            <div class="gridCell2">
+              {{ courseYards.outTotal }}
+            </div>
+            <div class="gridCell" *ngFor="let yardage2 of courseYards.inYards">
+              {{ yardage2 }}
+            </div>
+            <div class="gridCell2">
+              {{ courseYards.inTotal }}
             </div>
           </ion-col>
         </ion-row>
-
       </ion-grid>
     </ion-card-content>
   </ion-card>

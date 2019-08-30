@@ -47,10 +47,22 @@ export class GamePagePage implements OnInit {
     this.courseHoles.outHoles.forEach( v => {
       v.teeBoxes.forEach( teeBox => {
         if (teeBox.teeType === this.selectedTee) {
-          this.courseYards.outYards[v.hole - 1] = teeBox.yards;
+          this.courseYards.outYards.push(teeBox.yards);
+          this.courseYards.outTotal += teeBox.yards;
         }
       });
     });
+    this.courseHoles.inHoles.forEach( v => {
+      v.teeBoxes.forEach( teeBox => {
+        if (teeBox.teeType === this.selectedTee) {
+          this.courseYards.inYards.push(teeBox.yards);
+          this.courseYards.inTotal += teeBox.yards;
+        }
+      });
+    });
+    this.courseYards.allTotal = this.courseYards.outTotal + this.courseYards.inTotal;
+
+    console.log(this.courseYards, this.courseHoles);
   }
 
   async showToast(msg) {

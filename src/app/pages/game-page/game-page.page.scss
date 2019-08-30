@@ -1,6 +1,12 @@
 .gridCell {
-    background-color:lightgrey;
+    background-color:rgb(236, 235, 235);
+    
     border: solid 1px grey;
     border-bottom-style: none;
     border-right-style: none;
+}
+
+.gridCell2 {
+    @extend .gridCell;
+    background-color:lightgrey;
 }
