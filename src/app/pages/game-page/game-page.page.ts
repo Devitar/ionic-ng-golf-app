@@ -115,6 +115,19 @@ export class GamePagePage implements OnInit {
     }
   }
 
+  updateScores() {
+    console.log('update scores', this.players);
+    
+    this.players.forEach(player => {
+      const playerScoreOut = document.getElementsByClassName(player.name + 'Out');
+      const playerScoreIn = document.getElementsByClassName(player.name + 'In');
+      console.log(playerScoreOut, playerScoreIn)
+      for (let i = 0; i < playerScoreOut.length; i++) {
+        console.log(playerScoreOut[i]);
+      }
+    });
+  }
+
   saveGame() {
 
     this.showToast('Your scores have been saved!');

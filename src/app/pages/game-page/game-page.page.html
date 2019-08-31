@@ -25,6 +25,9 @@
       <ion-grid>
         <ion-row>
           <ion-col>
+            <div class="gridCell2">
+              Holes
+            </div>
             <div class="gridCell" *ngFor="let hole of courseHoles.outHoles">
               {{ hole.hole }}
             </div>
@@ -40,6 +43,9 @@
           </ion-col>
 
           <ion-col>
+            <div class="gridCell2">
+              Yards
+            </div>
             <div class="gridCell" *ngFor="let yardage of courseYards.outYards">
               {{ yardage }}
             </div>
@@ -55,6 +61,9 @@
           </ion-col>
 
           <ion-col>
+            <div class="gridCell2">
+              Handicap
+            </div>
             <div class="gridCell" *ngFor="let handicap of courseHcp.outHcp">
               {{ handicap }}
             </div>
@@ -69,30 +78,42 @@
             </div>
           </ion-col>
 
+          <!-- player columns -->
           <ion-col *ngFor="let player of players">
-            <div
-              class="gridCell3"
-              *ngFor="let slot of courseHoles.outHoles"
-              contenteditable="true"
-            >
-              None
+            <div class="gridCell2">
+              {{ player.name }}
             </div>
-            <div class="gridCell2" id="player.name | totalId:1">
+            <ion-input
+              [class]="player.name | inputCell:'Out'"
+              *ngFor="let slot of courseHoles.outHoles"
+              placeholder="0"
+              type="number"
+              maxlength="2"
+              (ionChange)="updateScores()"
+            >
+            </ion-input>
+            <div class="gridCell2" [id]="player.name | totalId:1">
               0
             </div>
-            <div
-              class="gridCell3"
+            <ion-input
+              [class]="player.name | inputCell:'In'"
               *ngFor="let slot of courseHoles.inHoles"
-              contenteditable="true"
+              placeholder="0"
+              type="number"
+              maxlength="2"
+              (ionChange)="updateScores()"
             >
-              None
-            </div>
+            </ion-input>
             <div class="gridCell2" id="player.name | totalId:2">
               0
             </div>
           </ion-col>
+          <!--   -->
 
           <ion-col>
+            <div class="gridCell2">
+              Par
+            </div>
             <div class="gridCell" *ngFor="let par of coursePar.outPar">
               {{ par }}
             </div>

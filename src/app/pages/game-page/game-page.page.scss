@@ -5,7 +5,7 @@
     border-bottom-style: none;
     border-right-style: none;
 
-    min-height: 40px;
+    height: 42px;
 }
 
 .gridCell2 {
@@ -15,5 +15,5 @@
 
 .gridCell3 {
     @extend .gridCell;
-    background-color: rgb(62, 200, 255);
+    background-color: rgba(56, 136, 255, 0.4);
 }
