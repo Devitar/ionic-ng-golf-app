@@ -17,3 +17,7 @@
     @extend .gridCell;
     background-color: rgba(56, 136, 255, 0.4);
 }
+
+.scorecardContainer {
+    overflow: scroll;
+}
