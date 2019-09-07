@@ -80,48 +80,6 @@
               </div>
             </ion-col>
 
-            <!-- player columns -->
-            <ion-col size="3" *ngFor="let player of players">
-              <div class="gridCell2">
-                {{ player.name }}
-              </div>
-              <form [formGroup]="playerScoreGroups[player.name][0]">
-                <ion-input [class]="player.name | inputCell:'Out'"
-                *ngFor="let slot of courseHoles.outHoles; let i = index" placeholder="0" type="tel" maxlength="2"
-                (ionChange)="updateScores($event)" [formControlName]="i | formConversion:'In'">
-                </ion-input>
-                <div class="gridCell2" [id]="player.name | totalId:1">
-                  {{ playerScoreGroups[player.name][1].OutTotal }}
-                </div>
-                <ion-input [class]="player.name | inputCell:'In'" 
-                  *ngFor="let slot of courseHoles.inHoles; let i = index"placeholder="0" type="tel" maxlength="2" 
-                  (ionChange)="updateScores($event)" [formControlName]="i | formConversion:'Out'">
-                </ion-input>
-                <div class="gridCell2" id="player.name | totalId:2">
-                  {{ playerScoreGroups[player.name][1].InTotal }}
-                </div>
-              </form>
-            </ion-col>
-            <!-- <ion-col *ngFor='let player of players'>
-              <table>
-                <div class="gridCell2">
-                  {{ player.name }}
-                </div>
-                <input [class]="player.name | inputCell:'Out'" *ngFor="let slot of courseHoles.outHoles" placeholder="0"
-                  maxlength="2" type="number" (ionChange)="updateScores()" />
-                <div class="gridCell2" [id]="player.name | totalId:1">
-                  0
-                </div>
-                <ion-input [class]="player.name | inputCell:'In'" *ngFor="let slot of courseHoles.inHoles"
-                  placeholder="0" type="number" maxlength="2" (ionChange)="updateScores()">
-                </ion-input>
-                <div class="gridCell2" id="player.name | totalId:2">
-                  0
-                </div>
-              </table>
-            </ion-col> -->
-            <!--   -->
-
             <ion-col size="2">
               <div class="gridCell2">
                 Par
@@ -139,6 +97,31 @@
                 {{ coursePar.inTotal }}
               </div>
             </ion-col>
+
+            <!-- player columns -->
+            <ion-col size="3" *ngFor="let player of players">
+              <div class="gridCell2">
+                {{ player.name }}
+              </div>
+              <form [formGroup]="playerScoreGroups[player.name][0]">
+                <ion-input [class]="player.name | inputCell:'Out'"
+                  *ngFor="let slot of courseHoles.outHoles; let i = index" placeholder="0" type="tel" maxlength="2"
+                  (ionChange)="updateScores($event)" [formControlName]="i | formConversion:'In'">
+                </ion-input>
+                <div class="gridCell2" [id]="player.name | totalId:1">
+                  {{ playerScoreGroups[player.name][1].OutTotal }}
+                </div>
+                <ion-input [class]="player.name | inputCell:'In'"
+                  *ngFor="let slot of courseHoles.inHoles; let i = index" placeholder="0" type="tel" maxlength="2"
+                  (ionChange)="updateScores($event)" [formControlName]="i | formConversion:'Out'">
+                </ion-input>
+                <div class="gridCell2" id="player.name | totalId:2">
+                  {{ playerScoreGroups[player.name][1].InTotal }}
+                </div>
+              </form>
+            </ion-col>
+            <!--  -->
+
           </ion-row>
         </ion-grid>
       </ion-card-content>

@@ -116,8 +116,6 @@ export class GamePagePage implements OnInit {
       for (let i = 0; i < 9; i++) {
         playerControl[i.toString() + 'Out'] = new FormControl('');
       }
-      // playerControl['OutTotal'] = new FormControl('');
-      // playerControl['InTotal'] = new FormControl('');
 
       this.playerScoreGroups[player.name] = [
         new FormGroup(playerControl),
@@ -167,13 +165,8 @@ export class GamePagePage implements OnInit {
         let totalCountIn = 0;
         Object.keys(formValue).forEach(index => {
           if (!isValid) { return; }
-          if (index !== 'OutTotal' && index !== 'InTotal') {
             let value = formValue[index];
-            
-          // if (typeof value === 'string' && value !== '') {
-          //   form.patchValue({index: ''});
-          //   value = formValue[index];
-          // }
+
             if (value === '') {
               isValid = false;
             } else {
@@ -184,22 +177,18 @@ export class GamePagePage implements OnInit {
               }
             }
             if (indexCount === 8 && isValid) {
-              console.log('Update out score', totalCountOut);
-              // formValue.OutTotal = totalCountOut;
               this.playerScoreGroups[playerName][1].OutTotal = totalCountOut;
               
             }
             if (indexCount === 17 && isValid) {
-              console.log('Update in score', totalCountOut);
-              // form.patchValue({'InTotal': totalCountIn});
               this.playerScoreGroups[playerName][1].InTotal = totalCountIn;
 
             }
             indexCount++;
-          }
         });
         if (isValid) {
           console.log(playerName, '`s scorecard is completed');
+          // To Do Calculate totals
         }
       });
     }
