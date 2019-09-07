@@ -3,6 +3,7 @@ import { ScorecardService } from 'src/app/api/score-card-service.service';
 import { Player } from 'src/app/models/player';
 import { NavController, ToastController } from '@ionic/angular';
 import { GolfCourse } from 'src/app/models/golf-course';
+import { FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-game-page',
@@ -39,6 +40,8 @@ export class GamePagePage implements OnInit {
     inTotal: 0,
     allTotal: 0,
   };
+
+  playerScoreGroups = {};
 
   constructor(
     private scoreCardService: ScorecardService,
@@ -90,6 +93,11 @@ export class GamePagePage implements OnInit {
     });
     this.courseYards.allTotal = this.courseYards.outTotal + this.courseYards.inTotal;
 
+    this.players.forEach(player => {
+      this.playerScoreGroups[player.name] = new FormGroup({
+        
+      })
+    });
   }
 
   async showToast(msg) {

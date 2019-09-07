@@ -1,7 +1,7 @@
 <ion-header>
   <ion-toolbar color="primary">
     <ion-buttons slot="start">
-      <ion-back-button></ion-back-button>
+      <!-- <ion-back-button></ion-back-button> -->
     </ion-buttons>
     <ion-buttons slot="end">
       <ion-button (click)="saveGame()">
@@ -15,35 +15,18 @@
 
 <ion-content>
 
-  <ion-card id="mainScoreCard2">
+  <!-- <ion-card id="mainScoreCard"> -->
+  <div class="scorecardContainer">
     <ion-card-header>
       <ion-card-title>{{ selectedCourse.name }}:
         {{ selectedTee | capitalizeFirst }}</ion-card-title>
     </ion-card-header>
-    <div class="scorecardContainer">
-      <table>
-        <tr>
-          <th id='holes'>Holes</th>
-          <th id='yards'>Yards</th>
-          <th id='handicap'>Handicap</th>
-          <th *ngFor="let player of players">{{ player.name }}</th>
-        </tr>
-      </table>
-    </div>
-  </ion-card>
+    <div scrollX="true">
 
-
-
-  <ion-card id="mainScoreCard">
-    <div class="scorecardContainer">
-      <ion-card-header>
-        <ion-card-title>{{ selectedCourse.name }}:
-          {{ selectedTee | capitalizeFirst }}</ion-card-title>
-      </ion-card-header>
-      <ion-card-content>
-        <ion-grid>
-          <ion-row>
-            <ion-col>
+      <ion-card-content scroll-x="true" class="scorecardContent">
+        <ion-grid class="scorecardGrid" fixed="true">
+          <ion-row nowrap class="horizonalScroll" align-items-center>
+            <ion-col size="2">
               <div class="gridCell2">
                 Holes
               </div>
@@ -61,7 +44,7 @@
               </div>
             </ion-col>
 
-            <ion-col>
+            <ion-col size="2">
               <div class="gridCell2">
                 Yards
               </div>
@@ -79,7 +62,7 @@
               </div>
             </ion-col>
 
-            <ion-col>
+            <ion-col size="3">
               <div class="gridCell2">
                 Handicap
               </div>
@@ -98,24 +81,24 @@
             </ion-col>
 
             <!-- player columns -->
-            <!-- <ion-col *ngFor="let player of players">
+            <ion-col size="3" *ngFor="let player of players">
               <div class="gridCell2">
                 {{ player.name }}
               </div>
-              <ion-input [class]="player.name | inputCell:'Out'" *ngFor="let slot of courseHoles.outHoles"
-                placeholder="0" type="number" maxlength="2" (ionChange)="updateScores()">
+              <ion-input [class]="player.name | inputCell:'Out'" *ngFor="let slot of courseHoles.outHoles; let i = index"
+                placeholder="0" type="tel" maxlength="2" (ionChange)="updateScores()">
               </ion-input>
               <div class="gridCell2" [id]="player.name | totalId:1">
                 0
               </div>
               <ion-input [class]="player.name | inputCell:'In'" *ngFor="let slot of courseHoles.inHoles" placeholder="0"
-                type="number" maxlength="2" (ionChange)="updateScores()">
+                type="tel" maxlength="2" (ionChange)="updateScores()">
               </ion-input>
               <div class="gridCell2" id="player.name | totalId:2">
                 0
               </div>
-            </ion-col> -->
-            <ion-col *ngFor='let player of players'>
+            </ion-col>
+            <!-- <ion-col *ngFor='let player of players'>
               <table>
                 <div class="gridCell2">
                   {{ player.name }}
@@ -132,10 +115,10 @@
                   0
                 </div>
               </table>
-            </ion-col>
+            </ion-col> -->
             <!--   -->
 
-            <ion-col>
+            <ion-col size="2">
               <div class="gridCell2">
                 Par
               </div>
@@ -155,6 +138,8 @@
           </ion-row>
         </ion-grid>
       </ion-card-content>
+
     </div>
-  </ion-card>
+  </div>
+  <!-- </ion-card> -->
 </ion-content>

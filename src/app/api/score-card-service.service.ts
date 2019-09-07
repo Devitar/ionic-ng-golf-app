@@ -30,7 +30,7 @@ export class ScorecardService {
     return this.httpClient.get<GolfCourse>(this.allCoursesUrl + '/' + id.toString());
   }
 
-  formatPhoneNumber(phoneNumberString) {
+  formatPhoneNumber(phoneNumberString: string) {
     const cleaned = ('' + phoneNumberString).replace(/\D/g, '');
     const match = cleaned.match(/^(1|)?(\d{3})(\d{3})(\d{4})$/);
     if (match) {
