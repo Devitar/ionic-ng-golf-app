@@ -16,7 +16,7 @@
 <ion-content>
 
   <!-- <ion-card id="mainScoreCard"> -->
-  <div class="scorecardContainer">
+  <div>
     <ion-card-header>
       <ion-card-title>{{ selectedCourse.name }}:
         {{ selectedTee | capitalizeFirst }}</ion-card-title>
@@ -85,18 +85,20 @@
               <div class="gridCell2">
                 {{ player.name }}
               </div>
-              <ion-input [class]="player.name | inputCell:'Out'" *ngFor="let slot of courseHoles.outHoles; let i = index"
-                placeholder="0" type="tel" maxlength="2" (ionChange)="updateScores()">
-              </ion-input>
-              <div class="gridCell2" [id]="player.name | totalId:1">
-                0
-              </div>
-              <ion-input [class]="player.name | inputCell:'In'" *ngFor="let slot of courseHoles.inHoles" placeholder="0"
-                type="tel" maxlength="2" (ionChange)="updateScores()">
-              </ion-input>
-              <div class="gridCell2" id="player.name | totalId:2">
-                0
-              </div>
+              <form [formGroup]="playerScoreGroups[player.name]">
+                <ion-input [class]="player.name | inputCell:'Out'"
+                *ngFor="let slot of courseHoles.outHoles; let i = index" placeholder="0" type="tel" maxlength="2"
+                (ionChange)="updateScores()" [formControlName]="i | formConversion:'In'">
+                </ion-input>
+                <div class="gridCell2" [id]="player.name | totalId:1">
+                </div>
+                <ion-input [class]="player.name | inputCell:'In'" 
+                  *ngFor="let slot of courseHoles.inHoles; let i = index"placeholder="0" type="tel" maxlength="2" 
+                  (ionChange)="updateScores()" [formControlName]="i | formConversion:'Out'">
+                </ion-input>
+                <div class="gridCell2" id="player.name | totalId:2">
+                </div>
+              </form>
             </ion-col>
             <!-- <ion-col *ngFor='let player of players'>
               <table>

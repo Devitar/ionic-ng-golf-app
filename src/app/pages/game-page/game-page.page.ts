@@ -3,7 +3,7 @@ import { ScorecardService } from 'src/app/api/score-card-service.service';
 import { Player } from 'src/app/models/player';
 import { NavController, ToastController } from '@ionic/angular';
 import { GolfCourse } from 'src/app/models/golf-course';
-import { FormGroup } from '@angular/forms';
+import { FormGroup, FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-game-page',
@@ -94,9 +94,15 @@ export class GamePagePage implements OnInit {
     this.courseYards.allTotal = this.courseYards.outTotal + this.courseYards.inTotal;
 
     this.players.forEach(player => {
-      this.playerScoreGroups[player.name] = new FormGroup({
-        
-      })
+      const playerControl = {};
+      for (let i = 0; i < 9; i++) {
+        playerControl[i.toString() + 'In'] = new FormControl('');
+      }
+      for (let i = 0; i < 9; i++) {
+        playerControl[i.toString() + 'Out'] = new FormControl('');
+      }
+      
+      this.playerScoreGroups[player.name] = new FormGroup(playerControl);
     });
   }
 
@@ -124,14 +130,23 @@ export class GamePagePage implements OnInit {
   }
 
   updateScores() {
-    console.log('update scores', this.players);
-    
-    this.players.forEach(player => {
-      const playerScoreOut = document.getElementsByClassName(player.name + 'Out');
-      const playerScoreIn = document.getElementsByClassName(player.name + 'In');
-      console.log(playerScoreOut, playerScoreIn)
-      for (let i = 0; i < playerScoreOut.length; i++) {
-        console.log(playerScoreOut[i]);
+    Object.keys(this.playerScoreGroups).forEach( playerName => {
+      const form = this.playerScoreGroups[playerName].value;
+      let isValid = true;
+      let indexCount = 0;
+      Object.keys(form).forEach( index => {
+        const value = form[index];
+        console.log(value);
+        if (typeof value == 'string') {
+          form[index] = '';
+        }
+        if (value === '') {
+          isValid = false;
+        }
+        indexCount++;
+      });
+      if (isValid) {
+        console.log(playerName, '`s scorecard is completed');
       }
     });
   }
