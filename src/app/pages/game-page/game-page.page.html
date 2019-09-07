@@ -85,18 +85,20 @@
               <div class="gridCell2">
                 {{ player.name }}
               </div>
-              <form [formGroup]="playerScoreGroups[player.name]">
+              <form [formGroup]="playerScoreGroups[player.name][0]">
                 <ion-input [class]="player.name | inputCell:'Out'"
                 *ngFor="let slot of courseHoles.outHoles; let i = index" placeholder="0" type="tel" maxlength="2"
-                (ionChange)="updateScores()" [formControlName]="i | formConversion:'In'">
+                (ionChange)="updateScores($event)" [formControlName]="i | formConversion:'In'">
                 </ion-input>
                 <div class="gridCell2" [id]="player.name | totalId:1">
+                  {{ playerScoreGroups[player.name][1].OutTotal }}
                 </div>
                 <ion-input [class]="player.name | inputCell:'In'" 
                   *ngFor="let slot of courseHoles.inHoles; let i = index"placeholder="0" type="tel" maxlength="2" 
-                  (ionChange)="updateScores()" [formControlName]="i | formConversion:'Out'">
+                  (ionChange)="updateScores($event)" [formControlName]="i | formConversion:'Out'">
                 </ion-input>
                 <div class="gridCell2" id="player.name | totalId:2">
+                  {{ playerScoreGroups[player.name][1].InTotal }}
                 </div>
               </form>
             </ion-col>
