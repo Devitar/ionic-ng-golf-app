@@ -23,6 +23,7 @@ export class ScorecardService {
   storageKey;
 
   savedGames = [];
+  selectedGameSave;
 
   constructor(
     private httpClient: HttpClient,
@@ -32,6 +33,7 @@ export class ScorecardService {
     if (this.storageKey === null) {
       localStorage.setItem('storageKey', uuid());
     }
+    this.getSavedGames();
   }
 
   saveGame(data: any) {
@@ -40,7 +42,7 @@ export class ScorecardService {
       .add(data)
       .then(
         res => {
-          console.log(res);
+          // console.log(res);
         },
         err => reject(err)
       );

@@ -64,7 +64,6 @@ export class GamePagePage implements OnInit {
     private toastController: ToastController,
   ) {
 
-
     this.players = this.scoreCardService.allPlayers;
     this.selectedCourse = this.scoreCardService.selectedCourse;
     this.selectedTee = this.scoreCardService.selectedTee;
@@ -112,24 +111,44 @@ export class GamePagePage implements OnInit {
     this.courseHcp.allTotal = this.courseHcp.outTotal + this.courseHcp.inTotal;
     this.coursePar.allTotal = this.coursePar.outTotal + this.coursePar.inTotal;
 
-    this.players.forEach(player => {
-      const playerControl = {};
-      for (let i = 0; i < 9; i++) {
-        playerControl[i.toString() + 'In'] = new FormControl('');
-      }
-      for (let i = 0; i < 9; i++) {
-        playerControl[i.toString() + 'Out'] = new FormControl('');
-      }
-
-      this.playerScoreGroups[player.name] = [
-        new FormGroup(playerControl),
-        {
-          OutTotal: 0,
-          InTotal: 0,
-          AllTotal: 0,
+    if (this.scoreCardService.selectedGameSave) {
+      // Load saved game
+      this.players.forEach(player => {
+        const playerControl = this.scoreCardService.selectedGameSave[player.name];
+        Object.keys(playerControl).forEach(key => {
+          const data = playerControl[key];
+          playerControl[key] = new FormControl(data);
+        });
+        this.playerScoreGroups[player.name] = [
+          new FormGroup(playerControl),
+          {
+            OutTotal: 0,
+            InTotal: 0,
+            AllTotal: 0,
+          }
+        ];
+      });
+    } else {
+      // Populate new game
+      this.players.forEach(player => {
+        const playerControl = {};
+        for (let i = 0; i < 9; i++) {
+          playerControl[i.toString() + 'In'] = new FormControl('');
         }
-      ];
-    });
+        for (let i = 0; i < 9; i++) {
+          playerControl[i.toString() + 'Out'] = new FormControl('');
+        }
+
+        this.playerScoreGroups[player.name] = [
+          new FormGroup(playerControl),
+          {
+            OutTotal: 0,
+            InTotal: 0,
+            AllTotal: 0,
+          }
+        ];
+      });
+    }
   }
 
   async showToast(msg) {
@@ -204,17 +223,16 @@ export class GamePagePage implements OnInit {
     const gameData = {};
     Object.keys(this.playerScoreGroups).forEach(playerName => {
       const data = this.playerScoreGroups[playerName][0].getRawValue();
-      console.log(data);
       gameData[playerName] = data;
     });
     const today = new Date();
     const dd = String(today.getDate()).padStart(2, '0');
-    const mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+    const mm = String(today.getMonth() + 1).padStart(2, '0');
     const yyyy = today.getFullYear();
     const convertedDate = mm + '/' + dd + '/' + yyyy;
 
     const savedGame = {
-      course: this.selectedCourse.name,
+      course: this.selectedCourse.id,
       date: convertedDate,
       tee: this.selectedTee,
       data: gameData
@@ -223,7 +241,7 @@ export class GamePagePage implements OnInit {
 
     // todo show loading
     await this.scoreCardService.saveGame(savedGame);
-    this.scoreCardService.getSavedGames();
+
     this.showToast('Your scores have been saved!');
   }
 

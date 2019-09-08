@@ -16,6 +16,11 @@ export class AppComponent {
       url: '/home',
       icon: 'home'
     },
+    {
+      title: 'Saved Games',
+      url: '/saved-games',
+      icon: 'save'
+    }
   ];
 
   constructor(

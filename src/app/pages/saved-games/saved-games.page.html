@@ -1,0 +1,21 @@
+<ion-header>
+    <ion-toolbar color="primary">
+      <ion-buttons slot="start">
+        <ion-back-button></ion-back-button>
+      </ion-buttons>
+      <ion-buttons slot="end">
+        <ion-menu-button></ion-menu-button>
+      </ion-buttons>
+      <ion-title>Saved Games</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+<ion-content>
+  <ion-card>
+    <ion-card-content>
+      <ion-button expand="block" *ngFor="let game of savedGames" (click)="goToGame(game)">
+        {{ game.date }}
+      </ion-button>
+    </ion-card-content>
+  </ion-card>
+</ion-content>
