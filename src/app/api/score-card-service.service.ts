@@ -5,6 +5,9 @@ import { map } from 'rxjs/operators';
 import { GolfCourses } from '../models/golf-courses';
 import { GolfCourse } from '../models/golf-course';
 import { Player } from '../models/player';
+import {
+  v4 as uuid
+} from 'uuid';
 
 @Injectable({
   providedIn: 'root'
@@ -18,7 +21,14 @@ export class ScorecardService {
 
   allPlayers: Array<Player>;
 
-  constructor(private httpClient: HttpClient) { }
+  storageKey;
+
+  constructor(private httpClient: HttpClient) {
+    this.storageKey = localStorage.getItem('storageKey');
+    if (this.storageKey === null) {
+      localStorage.setItem('storageKey', uuid());
+    }
+   }
 
   getGolfCourses(): Observable<GolfCourse[]> {
     return this.httpClient.get<GolfCourses>(this.allCoursesUrl).pipe(

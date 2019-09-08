@@ -19,6 +19,8 @@ import {
   FormGroup,
   FormControl
 } from '@angular/forms';
+import { AngularFirestore } from '@angular/fire/firestore';
+import { reject } from 'q';
 
 @Component({
   selector: 'app-game-page',
@@ -56,13 +58,18 @@ export class GamePagePage implements OnInit {
     allTotal: 0,
   };
 
+  
+
   playerScoreGroups = {};
 
   constructor(
     private scoreCardService: ScorecardService,
     private navCtrl: NavController,
-    private toastController: ToastController
+    private toastController: ToastController,
+    private firebase: AngularFirestore,
   ) {
+
+
     this.players = this.scoreCardService.allPlayers;
     this.selectedCourse = this.scoreCardService.selectedCourse;
     this.selectedTee = this.scoreCardService.selectedTee;
@@ -198,7 +205,23 @@ export class GamePagePage implements OnInit {
   }
 
   saveGame() {
+    const gameData = {};
+    Object.keys(this.playerScoreGroups).forEach(playerName => {
+      const data = this.playerScoreGroups[playerName][0].getRawValue();
+      console.log(data);
+      gameData[playerName] = data;
+    });
+    const savedGame = {
+      course: this.selectedCourse,
+      tee: this.selectedTee,
+      data: gameData
+    };
 
+    this.firebase.collection('savedGames')
+      .add(savedGame)
+      .then(res => {
+        console.log(res);
+      }, err => reject(err));
     this.showToast('Your scores have been saved!');
   }
 
