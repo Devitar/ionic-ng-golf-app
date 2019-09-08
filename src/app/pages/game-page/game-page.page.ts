@@ -243,6 +243,7 @@ export class GamePagePage implements OnInit {
     await this.scoreCardService.saveGame(savedGame);
 
     this.showToast('Your scores have been saved!');
+    this.scoreCardService.getSavedGames();
   }
 
 }
