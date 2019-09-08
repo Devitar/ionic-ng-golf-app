@@ -19,8 +19,6 @@ import {
   FormGroup,
   FormControl
 } from '@angular/forms';
-import { AngularFirestore } from '@angular/fire/firestore';
-import { reject } from 'q';
 
 @Component({
   selector: 'app-game-page',
@@ -58,15 +56,12 @@ export class GamePagePage implements OnInit {
     allTotal: 0,
   };
 
-  
-
   playerScoreGroups = {};
 
   constructor(
     private scoreCardService: ScorecardService,
     private navCtrl: NavController,
     private toastController: ToastController,
-    private firebase: AngularFirestore,
   ) {
 
 
@@ -197,31 +192,38 @@ export class GamePagePage implements OnInit {
           indexCount++;
         });
         if (isValid) {
-          console.log(playerName, '`s scorecard is completed');
+          // console.log(playerName, '`s scorecard is completed');
           // To Do show thumbs up or down based on par
         }
       });
     }
   }
 
-  saveGame() {
+  async saveGame() {
+    // Set up data to be saved
     const gameData = {};
     Object.keys(this.playerScoreGroups).forEach(playerName => {
       const data = this.playerScoreGroups[playerName][0].getRawValue();
       console.log(data);
       gameData[playerName] = data;
     });
+    const today = new Date();
+    const dd = String(today.getDate()).padStart(2, '0');
+    const mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+    const yyyy = today.getFullYear();
+    const convertedDate = mm + '/' + dd + '/' + yyyy;
+
     const savedGame = {
-      course: this.selectedCourse,
+      course: this.selectedCourse.name,
+      date: convertedDate,
       tee: this.selectedTee,
       data: gameData
     };
+    //
 
-    this.firebase.collection('savedGames')
-      .add(savedGame)
-      .then(res => {
-        console.log(res);
-      }, err => reject(err));
+    // todo show loading
+    await this.scoreCardService.saveGame(savedGame);
+    this.scoreCardService.getSavedGames();
     this.showToast('Your scores have been saved!');
   }
 
