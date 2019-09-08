@@ -6,16 +6,24 @@
     border-right-style: none;
 
     height: 42px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
 }
 
 .gridCell2 {
     @extend .gridCell;
     background-color: lightgrey;
+    text-align: center;
+
 }
 
 .gridCell3 {
     @extend .gridCell;
     background-color: rgba(56, 136, 255, 0.4);
+    text-align: center;
 }
 
 .horizontalScroll {

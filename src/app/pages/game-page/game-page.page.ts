@@ -107,6 +107,8 @@ export class GamePagePage implements OnInit {
       });
     });
     this.courseYards.allTotal = this.courseYards.outTotal + this.courseYards.inTotal;
+    this.courseHcp.allTotal = this.courseHcp.outTotal + this.courseHcp.inTotal;
+    this.coursePar.allTotal = this.coursePar.outTotal + this.coursePar.inTotal;
 
     this.players.forEach(player => {
       const playerControl = {};
@@ -122,6 +124,7 @@ export class GamePagePage implements OnInit {
         {
           OutTotal: 0,
           InTotal: 0,
+          AllTotal: 0,
         }
       ];
     });
@@ -165,9 +168,9 @@ export class GamePagePage implements OnInit {
         let totalCountIn = 0;
         Object.keys(formValue).forEach(index => {
           if (!isValid) { return; }
-            let value = formValue[index];
+          const value = formValue[index];
 
-            if (value === '') {
+          if (value === '') {
               isValid = false;
             } else {
               if (indexCount < 9) {
@@ -175,20 +178,20 @@ export class GamePagePage implements OnInit {
               } else {
                 totalCountIn += Number(value);
               }
-            }
-            if (indexCount === 8 && isValid) {
-              this.playerScoreGroups[playerName][1].OutTotal = totalCountOut;
-              
-            }
-            if (indexCount === 17 && isValid) {
-              this.playerScoreGroups[playerName][1].InTotal = totalCountIn;
 
             }
-            indexCount++;
+          if (indexCount === 8 && isValid) {
+              this.playerScoreGroups[playerName][1].OutTotal = totalCountOut;
+            }
+          if (indexCount === 17 && isValid) {
+              this.playerScoreGroups[playerName][1].InTotal = totalCountIn;
+              this.playerScoreGroups[playerName][1].AllTotal = totalCountIn + totalCountOut;
+            }
+          indexCount++;
         });
         if (isValid) {
           console.log(playerName, '`s scorecard is completed');
-          // To Do Calculate totals
+          // To Do show thumbs up or down based on par
         }
       });
     }
