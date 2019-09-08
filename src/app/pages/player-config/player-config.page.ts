@@ -72,7 +72,7 @@ export class PlayerConfigPage implements OnInit {
         };
         this.scoreCardService.allPlayers.push(newPlayer);
       });
-
+      this.scoreCardService.selectedGameSave = null;
       this.navCtrl.navigateForward(['game-page']);
     }
   }
